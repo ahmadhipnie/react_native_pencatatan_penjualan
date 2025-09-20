@@ -6,8 +6,6 @@ import Colors from "../../constants/Colors";
 export default function Profile() {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Profile</Text>
-
       {/* User Card */}
       <View style={styles.userCard}>
         <View style={styles.avatarContainer}>
