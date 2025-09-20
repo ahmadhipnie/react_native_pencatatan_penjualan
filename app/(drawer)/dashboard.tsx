@@ -1,13 +1,11 @@
 import React from "react";
 import { ScrollView, StyleSheet, Text, View } from "react-native";
-import CustomHeader from "../../components/layout/Header"; // Adjust the path as needed
 import Colors from "../../constants/Colors";
 
 
 export default function Dashboard() {
   return (
     <ScrollView style={styles.container}>
-      <CustomHeader title="Daftar Penjualan" />
       <View style={styles.statsContainer}>
         <Text style={styles.sectionTitle}>Hari Ini</Text>
         <View style={styles.statsRow}>
