@@ -43,8 +43,8 @@ export default function DrawerLayout() {
           name="Product"
           component={Product}
           options={{
-            drawerLabel: "Product",
-            title: "Product",
+            drawerLabel: "Produk",
+            title: "Produk",
             drawerIcon: ({ color, size }) => (
               <Ionicons name="cube-outline" size={size} color={color} />
             ),

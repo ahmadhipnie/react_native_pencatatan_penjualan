@@ -101,6 +101,7 @@ export default function Product() {
         <Text style={styles.sectionTitle}>Popular Semua</Text>
         <TouchableOpacity style={styles.addProductBtn}>
           <Ionicons name="cart" size={24} color={Colors.primary} />
+          <Text style={styles.addProductText}>Total Produk : </Text>
         </TouchableOpacity>
       </View>
 
