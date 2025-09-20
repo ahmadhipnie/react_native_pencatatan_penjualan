@@ -7,21 +7,25 @@ import Dashboard from "./dashboard";
 import Product from "./product";
 import Profile from "./profile";
 import Report from "./report";
+import { StatusBar } from "expo-status-bar";
 
 const Drawer = createDrawerNavigator();
 
 export default function DrawerLayout() {
   return (
+    <>
+    <StatusBar style="dark" />
     <Drawer.Navigator
       initialRouteName="Dashboard"
       drawerContent={(props) => <CustomDrawerContent {...props} />}
       screenOptions={{
         drawerType: "front",
         headerShown: true,
+        headerStatusBarHeight: 0,
         drawerActiveTintColor: Colors.primary,
         drawerInactiveTintColor: Colors.textSecondary,
         drawerLabelStyle: { fontSize: 15 },
-        drawerStyle: { width: 260 },
+        drawerStyle: { width: "55%" },
       }}
     >
       <Drawer.Screen
@@ -69,5 +73,6 @@ export default function DrawerLayout() {
         }}
       />
     </Drawer.Navigator>
+    </>
   );
 }
