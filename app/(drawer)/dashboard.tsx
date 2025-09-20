@@ -1,78 +1,110 @@
+import BarChart from "@/components/charts/BarChart";
+import Container from "@/components/layout/Container";
+import Card from "@/components/ui/Card";
+import MetricCard from "@/components/ui/MetricCard";
+import { todayMetrics } from "@/data/DummyDashboard";
 import React from "react";
 import { ScrollView, StyleSheet, Text, View } from "react-native";
-import Colors from "../../constants/Colors";
 
+const Dashboard: React.FC = () => {
+  // data untuk bar chart
+  const chartData = [
+    { label: "Sen", value: 1200000 },
+    { label: "Sel", value: 1900000 },
+    { label: "Rab", value: 1500000 },
+    { label: "Kam", value: 2100000 },
+    { label: "Jum", value: 1800000 },
+    { label: "Sab", value: 3250000 },
+    { label: "Min", value: 1000000 },
+  ];
 
-export default function Dashboard() {
+  // tanggal hari ini dalam format lokal
+  const currentDate = new Date().toLocaleDateString("id-ID", {
+    weekday: "long",
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+
   return (
-    <ScrollView style={styles.container}>
-      <View style={styles.statsContainer}>
-        <Text style={styles.sectionTitle}>Hari Ini</Text>
-        <View style={styles.statsRow}>
-          <View style={styles.statItem}>
-            <Text style={styles.statValue}>Rp 2.500.000</Text>
-            <Text style={styles.statLabel}>Penjualan</Text>
-          </View>
-          <View style={styles.statItem}>
-            <Text style={styles.statValue}>15</Text>
-            <Text style={styles.statLabel}>Transaksi</Text>
-          </View>
-          <View style={styles.statItem}>
-            <Text style={styles.statValue}>Rp 1.200.000</Text>
-            <Text style={styles.statLabel}>Pembelian</Text>
-          </View>
+    <Container>
+      <ScrollView showsVerticalScrollIndicator={false}>
+        {/* Header */}
+        <View style={styles.header}>
+          <Text style={styles.title}>Laporan Hari Ini</Text>
+          <Text style={styles.date}>{currentDate}</Text>
         </View>
-      </View>
-    </ScrollView>
+
+        {/* Metric Cards */}
+        <View>
+          {todayMetrics.map((metric) => (
+            <MetricCard key={metric.id} metric={metric} />
+          ))}
+        </View>
+
+        {/* Bar Chart dan Ringkasan Performa */}
+        <Card>
+          <BarChart data={chartData} title="Pendapatan Minggu Ini" />
+        </Card>
+
+        <Card>
+          <Text style={styles.sectionTitle}>Ringkasan Performa</Text>
+          <View style={styles.summaryItem}>
+            <Text style={styles.summaryLabel}>Transaksi Tertinggi</Text>
+            <Text style={styles.summaryValue}>Rp 325.000</Text>
+          </View>
+          <View style={styles.summaryItem}>
+            <Text style={styles.summaryLabel}>Produk Terlaris</Text>
+            <Text style={styles.summaryValue}>Kopi Arabika (42x)</Text>
+          </View>
+          <View style={styles.summaryItem}>
+            <Text style={styles.summaryLabel}>Pelanggan Baru</Text>
+            <Text style={styles.summaryValue}>8 Pelanggan</Text>
+          </View>
+        </Card>
+      </ScrollView>
+    </Container>
   );
-}
+};
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: Colors.background,
+  header: {
+    marginBottom: 24,
+  },
+  title: {
+    fontSize: 24,
+    fontWeight: "bold",
+    color: "#333333",
+    marginTop: 16,
+    marginBottom: 4,
+  },
+  date: {
+    fontSize: 14,
+    color: "#666666",
   },
   sectionTitle: {
     fontSize: 18,
     fontWeight: "bold",
-    color: Colors.text,
-    alignContent: "center",
-    textAlign: "center",
-    paddingLeft: 16,
-    paddingBottom: 16,
+    color: "#333333",
+    marginBottom: 16,
   },
-  grid: {
-    flexDirection: "row",
-    flexWrap: "wrap",
-    justifyContent: "space-between",
-  },
-  statsContainer: {
-    backgroundColor: Colors.surface,
-    padding: 16,
-    margin: 16,
-    borderRadius: 10,
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 3,
-  },
-  statsRow: {
+  summaryItem: {
     flexDirection: "row",
     justifyContent: "space-between",
-  },
-  statItem: {
     alignItems: "center",
-    flex: 1,
+    paddingVertical: 12,
+    borderBottomWidth: 1,
+    borderBottomColor: "#EEEEEE",
   },
-  statValue: {
-    fontSize: 16,
-    fontWeight: "bold",
-    color: Colors.primary,
-    marginBottom: 4,
-  },
-  statLabel: {
+  summaryLabel: {
     fontSize: 14,
-    color: Colors.textSecondary,
+    color: "#666666",
+  },
+  summaryValue: {
+    fontSize: 14,
+    fontWeight: "500",
+    color: "#333333",
   },
 });
+
+export default Dashboard;
